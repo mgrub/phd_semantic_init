@@ -1,0 +1,104 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix om: <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix ssn: <http://www.w3.org/ns/ssn/> .
+@prefix dsi: <http://www.example.com/ns/dsi/> .
+@prefix scal: <http://www.example.com/ns/scal/> .
+@prefix ex: <http://www.example.com/ns/example/> .
+
+
+# locations
+ex:location_A rdf:type owl:NamedIndividual , scal:Location .
+ex:location_B rdf:type owl:NamedIndividual , scal:Location .
+ex:location_C rdf:type owl:NamedIndividual , scal:Location .
+
+ex:unique_locations rdf:type owl:allDifferent;
+	owl:distinctMembers (ex:location_A ex:location_B ex:location_C) .
+
+# calibration model
+ex:gain rdf:type scal:Parameter ;
+	om:hasNumericalValue 1.2 ;
+	om:hasUnit om:one ;
+	scal:hasUncertainty [rdf:type
+	dsi:ExpandedUncertainty;
+	dsi:hasNumericalValue 0.1;
+	dsi:hasCoverageFactor 2.0;
+	dsi:hasCoverageProbability 0.95] .
+
+ex:offset rdf:type scal:Parameter ;
+	om:hasNumericalValue -0.1 ;
+	om:hasUnit om:metrePerSecond-TimeSquared ;
+	scal:hasUncertainty [rdf:type
+	dsi:ExpandedUncertainty;
+	dsi:hasNumericalValue 0.15;
+	dsi:hasCoverageFactor 2.0;
+	dsi:hasCoverageProbability 0.95] .
+
+ex:input rdf:type scal:Variable ;
+	om:hasDimension om:acceleration-Dimension .
+
+ex:output rdf:type scal:Variable ;
+	om:hasDimension om:acceleration-Dimension .
+
+ex:eqLinear rdf:type scal:Equation ;
+	# y = a * x + b
+	scal:hasMathMLDefinition
+	'''<apply>
+		<eq/>
+		<ci>ex:output</ci>
+		<apply>
+			<sum/>
+			<apply>
+				<times/>
+				<ci>ex:gain</ci>
+				<ci>ex:input</ci>
+			</apply>
+			<ci>ex:gain</ci>
+		</apply>
+	</apply>''' .
+
+ex:model_S1 rdf:type owl:NamedIndividual , scal:EquationModel ;
+	scal:hasEquation ex:eqLinear ;
+	scal:hasParameter ex:gain ;
+	scal:hasParameter ex:offset ;
+	scal:hasVariable ex:input ;
+	scal:hasVariable ex:output .
+
+ex:model_S2 rdf:type owl:NamedIndividual , scal:CalibrationModel .
+ex:model_S3 rdf:type owl:NamedIndividual , scal:CalibrationModel .
+ex:model_S4 rdf:type owl:NamedIndividual , scal:CalibrationModel .
+ex:model_S5 rdf:type owl:NamedIndividual , scal:CalibrationModel .
+
+# quantities
+ex:acceleration_z rdf:type owl:NamedIndividual , sosa:ObservableProperty , om:Quantity ;
+  om:hasDimension om:acceleration-Dimension .
+
+ex:air_temperature rdf:type owl:NamedIndividual , sosa:ObservableProperty , om:Quantity ;
+  om:hasDimension om:temperature-Dimension .
+
+# sensors
+ex:sensor_S1 rdf:type owl:NamedIndividual , sosa:Sensor ;
+  sosa:isHostedBy ex:location_A;
+  sosa:observes ex:acceleration_z ;
+  ssn:hasProperty ex:model_S1 .
+  
+ex:sensor_S2 rdf:type owl:NamedIndividual , sosa:Sensor ;
+  sosa:isHostedBy ex:location_A;
+  sosa:observes ex:acceleration_z ;
+  ssn:hasProperty ex:model_S2 .
+
+ex:sensor_S3 rdf:type owl:NamedIndividual , sosa:Sensor ;
+  sosa:isHostedBy ex:location_B;
+  sosa:observes ex:acceleration_z ;
+  ssn:hasProperty ex:model_S3 .
+  
+ex:sensor_S4 rdf:type owl:NamedIndividual , sosa:Sensor ;
+  sosa:isHostedBy ex:location_A;
+  sosa:observes ex:air_temperature ;
+  ssn:hasProperty ex:model_S4 .
+
+ex:sensor_S5 rdf:type owl:NamedIndividual , sosa:Sensor ;
+  sosa:isHostedBy ex:location_C;
+  sosa:observes ex:air_temperature .
+  
