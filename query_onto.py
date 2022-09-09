@@ -29,12 +29,15 @@ print(list(owl.default_world.inconsistent_classes()))
 
 
 prefixes = """
-PREFIX  om:    <http://www.ontology-of-units-of-measure.org/resource/om-2/>
-PREFIX  sosa:  <http://www.w3.org/ns/sosa/>
-PREFIX  ssn:   <http://www.w3.org/ns/ssn/>
-PREFIX  dsi:   <http://www.example.com/ns/dsi/>
-PREFIX  scal:  <http://www.example.com/ns/scal/>
-PREFIX  ex:    <http://www.example.com/ns/example/>
+PREFIX  om:       <http://www.ontology-of-units-of-measure.org/resource/om-2/>
+PREFIX  sosa:     <http://www.w3.org/ns/sosa/>
+PREFIX  ssn:      <http://www.w3.org/ns/ssn/>
+PREFIX  dsi:      <http://www.example.com/ns/dsi/>
+PREFIX  scal:     <http://www.example.com/ns/scal/>
+PREFIX  ex:       <http://www.example.com/ns/example/>
+PREFIX  sensor_1: <http://www.example.com/ns/sensor_1/>
+PREFIX  sensor_2: <http://www.example.com/ns/sensor_2/>
+PREFIX  sensor_3: <http://www.example.com/ns/sensor_3/>
 """
 
 query_same_location = """
@@ -42,18 +45,30 @@ SELECT ?s
 WHERE {{
     ?s sosa:isHostedBy ?l1 .
     {TARGET} sosa:isHostedBy ?l2 .
-    FILTER(?l1 = ?l2) .
-    FILTER(?s != {TARGET})
+    FILTER( ?l1 = ?l2 ) .
+    FILTER( ?s != {TARGET} )
 }}
 """
 
-query_same_quantity = """
+query_same_observable_property = """
 SELECT ?s
 WHERE {{
-    ?s sosa:observes ?m1 .
-    {TARGET} sosa:observes ?m2 .
-    FILTER(?m1 = ?m2) .
-    FILTER(?s != {TARGET})
+    {TARGET} sosa:observes ?m1 .
+    ?s sosa:observes ?m2 .
+    FILTER( ?m1 = ?m2 ) .
+    FILTER( ?s != {TARGET} ) .
+}}
+"""
+
+query_same_observed_quantity = """
+SELECT ?s
+WHERE {{
+    {TARGET} sosa:observes ?m1 .
+    ?s sosa:observes ?m2 .
+    ?m1 om:hasDimension ?d1 .
+    ?m2 om:hasDimension ?d2 .
+    FILTER( ?d1 = ?d2 ) .
+    FILTER( ?s != {TARGET} ) .
 }}
 """
 
@@ -79,9 +94,13 @@ WHERE {
 res = owl.default_world.sparql(prefixes + query_same_location.format(TARGET="ex:sensor_S1"))
 print(list(res))
 
-# sensors measuring same quantity as "TARGET"
-res = owl.default_world.sparql(prefixes + query_same_quantity.format(TARGET="ex:sensor_S1"))
+# sensors measuring same measurand as "TARGET"
+res = owl.default_world.sparql(prefixes + query_same_observable_property.format(TARGET="sensor_1:sensor"))
 print(list(res))
+
+# sensors measuring same quantity kind as "TARGET"
+res = owl.default_world.sparql(prefixes + query_same_observed_quantity.format(TARGET="sensor_1:sensor"))
+for i in list(res): print(i)
 
 # sensors with calibration models
 res = owl.default_world.sparql(prefixes + query_calibrated_sensors)
