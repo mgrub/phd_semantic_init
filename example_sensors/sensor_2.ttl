@@ -1,0 +1,46 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix om: <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix ssn: <http://www.w3.org/ns/ssn/> .
+@prefix scal: <http://www.example.com/ns/scal/> .
+@prefix : <http://www.example.com/ns/sensor_2/> .
+@prefix local: <http://www.example.com/ns/local/> .
+
+:sensor
+    a sosa:Sensor;
+    sosa:isHostedBy local:location_B;
+    sosa:observes local:acceleration_x;
+    sosa:observes local:acceleration_y;
+    sosa:observes local:acceleration_z;
+    ssn:hasProperty :model_S2 .
+
+# if an observation was made by this sensor, it has the unit 'm/s^2'
+:uses_unit 
+    a owl:Class;
+    owl:unionOf (
+        [a sosa:Observation]
+        [a owl:Restriction;
+            owl:onProperty sosa:madeBySensor;
+            owl:hasValue :sensor
+        ]
+        [a owl:Restriction;
+            owl:onProperty om:hasUnit;
+            owl:hasValue om:metrePerSecond-TimeSquared
+        ]
+    ) .
+
+local:acceleration_x
+    a sosa:ObservableProperty , om:Quantity;
+    om:hasDimension om:acceleration-Dimension .
+
+local:acceleration_y
+    a sosa:ObservableProperty , om:Quantity;
+    om:hasDimension om:acceleration-Dimension .
+
+local:acceleration_z
+    a sosa:ObservableProperty , om:Quantity;
+    om:hasDimension om:acceleration-Dimension .
+
+local:location_B 
+    rdf:type owl:NamedIndividual , scal:Location .
