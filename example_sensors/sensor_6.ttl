@@ -15,7 +15,7 @@
 :sensor
     a sosa:Sensor;
     sosa:isHostedBy local:location_A;
-    sosa:observes local:acceleration.
+    sosa:observes local:acceleration .
 
 # if an observation was made by this sensor, it has the unit 'm/s^2'
 :uses_unit 

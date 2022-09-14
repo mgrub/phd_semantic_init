@@ -7,14 +7,17 @@ owl.onto_path.append("ontologies")
 # required ontologies
 ontologies = [
     os.path.abspath("ontologies/scal.rdf"),
+    os.path.abspath("ontologies/trans.rdf"),
 ]
 
 # sensor self descriptions of interest
 example_sensors = [
-    os.path.abspath("example_sensors/rdf_example.rdf"),
     os.path.abspath("example_sensors/sensor_1.rdf"),
     os.path.abspath("example_sensors/sensor_2.rdf"),
     os.path.abspath("example_sensors/sensor_3.rdf"),
+    os.path.abspath("example_sensors/sensor_4.rdf"),
+    os.path.abspath("example_sensors/sensor_5.rdf"),
+    os.path.abspath("example_sensors/sensor_6.rdf"),
 ]
 
 # load the above listed rdf files
@@ -35,9 +38,12 @@ PREFIX  ssn:      <http://www.w3.org/ns/ssn/>
 PREFIX  dsi:      <http://www.example.com/ns/dsi/>
 PREFIX  scal:     <http://www.example.com/ns/scal/>
 PREFIX  ex:       <http://www.example.com/ns/example/>
-PREFIX  sensor_1: <http://www.example.com/ns/sensor_1/>
-PREFIX  sensor_2: <http://www.example.com/ns/sensor_2/>
-PREFIX  sensor_3: <http://www.example.com/ns/sensor_3/>
+PREFIX  sensor_1: <http://www.example.com/ns/S1/>
+PREFIX  sensor_2: <http://www.example.com/ns/S2/>
+PREFIX  sensor_3: <http://www.example.com/ns/S3/>
+PREFIX  sensor_4: <http://www.example.com/ns/S4/>
+PREFIX  sensor_5: <http://www.example.com/ns/S5/>
+PREFIX  sensor_6: <http://www.example.com/ns/S6/>
 """
 
 query_same_location = """
@@ -91,7 +97,7 @@ WHERE {
 """
 
 # sensors at same location as "TARGET"
-res = owl.default_world.sparql(prefixes + query_same_location.format(TARGET="ex:sensor_S1"))
+res = owl.default_world.sparql(prefixes + query_same_location.format(TARGET="sensor_6:sensor"))
 print(list(res))
 
 # sensors measuring same measurand as "TARGET"

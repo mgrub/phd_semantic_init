@@ -15,8 +15,7 @@
 :sensor
     a sosa:Sensor;
     sosa:isHostedBy local:location_C;
-    sosa:observes local:temperature;
-    ssn:hasProperty :model .
+    sosa:observes local:temperature .
 
 # if an observation was made by this sensor, it has the unit '°C'
 :uses_unit 
