@@ -10,13 +10,12 @@
 
 # specific prefixes
 @prefix local: <http://www.example.com/ns/local/> .
-@prefix :      <http://www.example.com/ns/S2/> .
+@prefix :      <http://www.example.com/ns/S6/> .
 
 :sensor
     a sosa:Sensor;
     sosa:isHostedBy local:location_A;
-    sosa:observes local:acceleration;
-    ssn:hasProperty :model .
+    sosa:observes local:acceleration.
 
 # if an observation was made by this sensor, it has the unit 'm/s^2'
 :uses_unit 
@@ -40,52 +39,3 @@ local:acceleration
 
 local:location_A 
     rdf:type owl:NamedIndividual , scal:Location .
-
-# calibration model
-:gain rdf:type scal:Parameter ;
-	om:hasNumericalValue 1.1 ;
-	om:hasUnit om:one ;
-	scal:hasUncertainty [rdf:type
-	si:ExpandedUncertainty;
-	si:hasNumericalValue 0.05;
-	si:hasCoverageFactor 2.0;
-	si:hasCoverageProbability 0.95] .
-
-:offset rdf:type scal:Parameter ;
-	om:hasNumericalValue 0.1 ;
-	om:hasUnit om:metrePerSecond-TimeSquared ;
-	scal:hasUncertainty [rdf:type
-	si:ExpandedUncertainty;
-	si:hasNumericalValue 0.05;
-	si:hasCoverageFactor 1.0;
-	si:hasCoverageProbability 0.67] .
-
-:input rdf:type scal:Variable ;
-	om:hasDimension om:acceleration-Dimension .
-
-:output rdf:type scal:Variable ;
-	om:hasDimension om:acceleration-Dimension .
-
-:eqLinear rdf:type scal:Equation ;
-	# y = a * x + b
-	scal:hasMathMLDefinition
-	'''<apply>
-		<eq/>
-		<ci>:output</ci>
-		<apply>
-			<sum/>
-			<apply>
-				<times/>
-				<ci>:gain</ci>
-				<ci>:input</ci>
-			</apply>
-			<ci>:gain</ci>
-		</apply>
-	</apply>''' .
-
-:model rdf:type owl:NamedIndividual , scal:EquationModel ;
-	scal:hasEquation :eqLinear ;
-	scal:hasParameter :gain ;
-	scal:hasParameter :offset ;
-	scal:hasVariable :input ;
-	scal:hasVariable :output .

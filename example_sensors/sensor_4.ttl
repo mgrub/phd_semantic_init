@@ -1,0 +1,45 @@
+# general prefixes
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix om:    <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
+@prefix sosa:  <http://www.w3.org/ns/sosa/> .
+@prefix ssn:   <http://www.w3.org/ns/ssn/> .
+@prefix scal:  <http://www.example.com/ns/scal/> .
+@prefix trans: <http://www.example.com/ns/trans/> .
+@prefix si:    <https://ptb.de/si#> .
+
+# specific prefixes
+@prefix local: <http://www.example.com/ns/local/> .
+@prefix :      <http://www.example.com/ns/S4/> .
+
+:sensor
+    a sosa:Sensor;
+    sosa:isHostedBy local:location_A;
+    sosa:observes local:temperature;
+    ssn:hasProperty :model .
+
+# if an observation was made by this sensor, it has the unit '°C'
+:uses_unit 
+    a owl:Class;
+    owl:unionOf (
+        [a sosa:Observation]
+        [a owl:Restriction;
+            owl:onProperty sosa:madeBySensor;
+            owl:hasValue :sensor
+        ]
+        [a owl:Restriction;
+            owl:onProperty om:hasUnit;
+            owl:hasValue om:degreeCelsius
+        ]
+    ) .
+
+# definitions that could also be made in some locally available ontology
+local:temperature
+    a sosa:ObservableProperty , om:Quantity;
+    om:hasDimension om:thermodynamicTemperature-Dimension .
+
+local:location_A 
+    rdf:type owl:NamedIndividual , scal:Location .
+
+# calibration model
+:model rdf:type owl:NamedIndividual , trans:LinearAffineModel .
