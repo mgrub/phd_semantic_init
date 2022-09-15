@@ -67,7 +67,7 @@ WHERE {{
 """
 
 query_same_observed_quantity = """
-SELECT ?s
+SELECT DISTINCT ?s
 WHERE {{
     {TARGET} sosa:observes ?m1 .
     ?s sosa:observes ?m2 .
@@ -96,18 +96,30 @@ WHERE {
 }
 """
 
+# according to owlready2-documentation instead of the string-replacement above it should
+# be also possible to use a "??" / "??1" direct replacement method provided by owlready.
+
+
+
+# execute the queries
+flatten_list = lambda l : [item[0] for item in l]
+
 # sensors at same location as "TARGET"
-res = owl.default_world.sparql(prefixes + query_same_location.format(TARGET="sensor_6:sensor"))
-print(list(res))
+res = owl.default_world.sparql(prefixes + query_same_location.format(TARGET="sensor_1:sensor"))
+same_location = flatten_list(res)
 
 # sensors measuring same measurand as "TARGET"
 res = owl.default_world.sparql(prefixes + query_same_observable_property.format(TARGET="sensor_1:sensor"))
-print(list(res))
+same_measurand = flatten_list(res)
 
 # sensors measuring same quantity kind as "TARGET"
 res = owl.default_world.sparql(prefixes + query_same_observed_quantity.format(TARGET="sensor_1:sensor"))
-for i in list(res): print(i)
+same_quantity = flatten_list(res)
 
 # sensors with calibration models
 res = owl.default_world.sparql(prefixes + query_calibrated_sensors)
-print(list(res))
+with_calibration_model = flatten_list(res)
+
+
+# get the intersection of the relevant results
+result = list(set.intersection(*map(set, [same_location, same_measurand, with_calibration_model])))
