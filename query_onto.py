@@ -51,18 +51,19 @@ SELECT ?s
 WHERE {{
     ?s sosa:isHostedBy ?l1 .
     {TARGET} sosa:isHostedBy ?l2 .
-    FILTER( ?l1 = ?l2 ) .
-    FILTER( ?s != {TARGET} )
+    FILTER( SAMETERM(?l1, ?l2) && !SAMETERM(?s, {TARGET}) )
 }}
 """
+
+    # FILTER( ?l1 = ?l2 ) .
+    # FILTER( ?s != {TARGET} )
 
 query_same_observable_property = """
 SELECT ?s
 WHERE {{
     {TARGET} sosa:observes ?m1 .
     ?s sosa:observes ?m2 .
-    FILTER( ?m1 = ?m2 ) .
-    FILTER( ?s != {TARGET} ) .
+    FILTER( SAMETERM(?m1, ?m2) && !SAMETERM(?s, {TARGET}) )
 }}
 """
 
@@ -73,16 +74,15 @@ WHERE {{
     ?s sosa:observes ?m2 .
     ?m1 om:hasDimension ?d1 .
     ?m2 om:hasDimension ?d2 .
-    FILTER( ?d1 = ?d2 ) .
-    FILTER( ?s != {TARGET} ) .
+    FILTER( SAMETERM(?d1, ?d2) && !SAMETERM(?s, {TARGET}) )
 }}
 """
 
 query_calibrated_sensors = """
 SELECT ?s
 WHERE {
-    ?s a/rdfs:subClassOf* sosa:Sensor .
-    ?s ssn:hasProperty ?prop .
+    ?s a/rdfs:subClassOf* sosa:Sensor ;
+        ssn:hasProperty ?prop .
     ?prop a/rdfs:subClassOf* scal:CalibrationModel .
 }
 """
@@ -90,8 +90,8 @@ WHERE {
 query_valid_calibrated_sensors = """
 SELECT ?s
 WHERE {
-    ?s a/rdfs:subClassOf* sosa:Sensor .
-    ?s ssn:hasProperty ?prop .
+    ?s a/rdfs:subClassOf* sosa:Sensor ;
+        ssn:hasProperty ?prop .
     ?prop a/rdfs:subClassOf* scal:CalibrationModel .
 }
 """
@@ -123,3 +123,4 @@ with_calibration_model = flatten_list(res)
 
 # get the intersection of the relevant results
 result = list(set.intersection(*map(set, [same_location, same_measurand, with_calibration_model])))
+print(result)
