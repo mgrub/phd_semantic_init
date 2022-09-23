@@ -13,7 +13,7 @@
 @prefix :      <http://www.example.com/ns/S2/> .
 
 :sensor
-    a sosa:Sensor;
+    a owl:NamedIndividual , sosa:Sensor;
     sosa:isHostedBy local:location_A;
     sosa:observes local:acceleration;
     ssn:hasProperty :model .
@@ -35,7 +35,7 @@
 
 # definitions that could also be made in some locally available ontology
 local:acceleration
-    a sosa:ObservableProperty , om:Quantity;
+    a owl:NamedIndividual , sosa:ObservableProperty , om:Quantity;
     om:hasDimension om:acceleration-Dimension .
 
 local:location_A 
