@@ -1,0 +1,51 @@
+
+# OM
+om:hasNumericalValue schema:domainIncludes si:Uncertainty .
+
+
+# SI
+si:hasCoverageFactor schema:rangeIncludes xsd:double .
+si:hasCoverageProbability schema:rangeIncludes xsd:double .
+si:hasIntervalMax schema:rangeIncludes xsd:double .
+si:hasIntervalMin schema:rangeIncludes xsd:double .
+si:hasStandardUncertainty schema:rangeIncludes xsd:float .
+
+si:ExpandedUncertainty rdfs:subClassOf [ rdf:type owl:Restriction ;
+    owl:onProperty om:hasNumericalValue ;
+    owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+    owl:onDataRange xsd:double
+  ] .
+
+si:Uncertainty rdfs:comment "Uncertainty object as specified in the D-SI standard"@en .
+
+
+si:MultivariateUncertainty rdf:type owl:Class ;
+  rdfs:subClassOf si:Uncertainty .
+
+si:EllipsoidalRegion rdf:type owl:Class ;
+  rdfs:subClassOf :MultivariateUncertainty .
+
+si:Parameter rdf:type owl:Class ;
+  owl:equivalentClass om:Measure .
+
+si:RectangularRegion rdf:type owl:Class ;
+  rdfs:subClassOf :MultivariateUncertainty .
+
+si:UnivariateUncertainty rdf:type owl:Class ;
+  rdfs:subClassOf si:Uncertainty .
+
+###############
+
+:isOfFamily rdf:type owl:ObjectProperty ;
+  schema:rangeIncludes :FilterType .
+
+:hasCovarianceMatrix rdf:type owl:DatatypeProperty ;
+  rdfs:subPropertyOf om:hasNumericalValue ;
+  schema:domainIncludes :MultivariateUncertainty ;
+  schema:rangeIncludes [ rdf:type rdfs:Datatype ;
+    owl:unionOf ( 
+      :MathMLLiteral
+      :TeXLiteral
+      rdf:XMLLiteral
+    )
+  ] .
