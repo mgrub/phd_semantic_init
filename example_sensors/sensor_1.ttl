@@ -1,16 +1,18 @@
 # general prefixes
-@prefix owl:   <http://www.w3.org/2002/07/owl#> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix om:    <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
-@prefix sosa:  <http://www.w3.org/ns/sosa/> .
-@prefix ssn:   <http://www.w3.org/ns/ssn/> .
-@prefix scal:  <http://www.example.com/ns/scal/> .
-@prefix trans: <http://www.example.com/ns/trans/> .
-@prefix si:    <https://ptb.de/si#> .
+@prefix owl:        <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:        <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema:     <https://schema.org/>
+@prefix om:         <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
+@prefix sosa:       <http://www.w3.org/ns/sosa/> .
+@prefix ssn:        <http://www.w3.org/ns/ssn/> .
+@prefix ssn-system: <http://www.w3.org/ns/ssn/systems/> .
+@prefix scal:       <http://www.example.com/ns/scal/> .
+@prefix trans:      <http://www.example.com/ns/trans/> .
+@prefix si:         <https://ptb.de/si#> .
 
 # specific prefixes
-@prefix local: <http://www.example.com/ns/local/> .
-@prefix :      <http://www.example.com/ns/S1/> .
+@prefix local:      <http://www.example.com/ns/local/> .
+@prefix :           <http://www.example.com/ns/S1/> .
 
 :sensor
     a owl:NamedIndividual , sosa:Sensor;
@@ -83,9 +85,14 @@ local:location_A
 		</apply>
 	</apply>''' .
 
+:validDuring rdf:type ssn-system:Condition ;
+	schema:startDate "2022-04-21T20:00" ;
+	schema:endDate "2026-04-20T00:00" .
+
 :model rdf:type owl:NamedIndividual , scal:EquationModel ;
 	scal:hasEquation :eqLinear ;
 	scal:hasParameter :gain ;
 	scal:hasParameter :offset ;
 	scal:hasVariable :input ;
-	scal:hasVariable :output .
+	scal:hasVariable :output ;
+	ssn-system:inCondition :validDuring ;
