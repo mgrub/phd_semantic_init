@@ -32,22 +32,22 @@ print(list(owl.default_world.inconsistent_classes()))
 
 
 prefixes = """
-PREFIX owl:        <http://www.w3.org/2002/07/owl#> .
-PREFIX rdf:        <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+PREFIX owl:        <http://www.w3.org/2002/07/owl#>
+PREFIX rdf:        <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX schema:     <https://schema.org/>
-PREFIX om:         <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
-PREFIX sosa:       <http://www.w3.org/ns/sosa/> .
-PREFIX ssn:        <http://www.w3.org/ns/ssn/> .
-PREFIX ssn-system: <http://www.w3.org/ns/ssn/systems/> .
-PREFIX scal:       <http://www.example.com/ns/scal/> .
-PREFIX trans:      <http://www.example.com/ns/trans/> .
-PREFIX si:         <https://ptb.de/si#> .
+PREFIX om:         <http://www.ontology-of-units-of-measure.org/resource/om-2/>
+PREFIX sosa:       <http://www.w3.org/ns/sosa/>
+PREFIX ssn:        <http://www.w3.org/ns/ssn/>
+PREFIX ssn-system: <http://www.w3.org/ns/ssn/systems/>
+PREFIX scal:       <http://www.example.com/ns/scal/>
+PREFIX trans:      <http://www.example.com/ns/trans/>
+PREFIX si:         <https://ptb.de/si#>
 
-PREFIX  local:    <http://www.example.com/ns/local/> .
+PREFIX  local:    <http://www.example.com/ns/local/>
 PREFIX  sensor_1: <http://www.example.com/ns/S1/>
 PREFIX  sensor_2: <http://www.example.com/ns/S2/>
 PREFIX  sensor_3: <http://www.example.com/ns/S3/>
-PREFIX  sensor_4: <http://www.example.com/ns/S4/>
+PREFIX  sensor_4: <http://www.example.com/ns/S4/> 
 PREFIX  sensor_5: <http://www.example.com/ns/S5/>
 PREFIX  sensor_6: <http://www.example.com/ns/S6/>
 """
