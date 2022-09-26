@@ -85,7 +85,7 @@ local:location_A
 		</apply>
 	</apply>''' .
 
-:validDuring rdf:type ssn-system:Condition ;
+:calibrationPeriod rdf:type ssn-system:Condition ;
 	schema:startDate "2022-04-21T20:00" ;
 	schema:endDate "2026-04-20T00:00" .
 
@@ -95,4 +95,4 @@ local:location_A
 	scal:hasParameter :offset ;
 	scal:hasVariable :input ;
 	scal:hasVariable :output ;
-	ssn-system:inCondition :validDuring .
+	ssn-system:inCondition :calibrationPeriod .
