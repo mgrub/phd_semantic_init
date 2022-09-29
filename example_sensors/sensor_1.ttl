@@ -81,7 +81,7 @@ local:location_A
 				<ci>:gain</ci>
 				<ci>:input</ci>
 			</apply>
-			<ci>:gain</ci>
+			<ci>:offset</ci>
 		</apply>
 	</apply>''' .
 
