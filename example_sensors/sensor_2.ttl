@@ -1,16 +1,19 @@
 # general prefixes
-@prefix owl:   <http://www.w3.org/2002/07/owl#> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix om:    <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
-@prefix sosa:  <http://www.w3.org/ns/sosa/> .
-@prefix ssn:   <http://www.w3.org/ns/ssn/> .
-@prefix scal:  <http://www.example.com/ns/scal/> .
-@prefix trans: <http://www.example.com/ns/trans/> .
-@prefix si:    <https://ptb.de/si#> .
+@prefix owl:        <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:        <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema:     <https://schema.org/> .
+@prefix om:         <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
+@prefix sosa:       <http://www.w3.org/ns/sosa/> .
+@prefix ssn:        <http://www.w3.org/ns/ssn/> .
+@prefix ssn-system: <http://www.w3.org/ns/ssn/systems/> .
+@prefix scal:       <http://www.example.com/ns/scal/> .
+@prefix trans:      <http://www.example.com/ns/trans/> .
+@prefix si:         <https://ptb.de/si#> .
 
 # specific prefixes
-@prefix local: <http://www.example.com/ns/local/> .
-@prefix :      <http://www.example.com/ns/S2/> .
+@prefix local:      <http://www.example.com/ns/local/> .
+@prefix :           <http://www.example.com/ns/S2/> .
+
 
 :sensor
     a owl:NamedIndividual , sosa:Sensor;
@@ -60,32 +63,15 @@ local:location_A
 	si:hasCoverageFactor 1.0;
 	si:hasCoverageProbability 0.67] .
 
-:input rdf:type scal:Variable ;
-	om:hasDimension om:acceleration-Dimension .
-
-:output rdf:type scal:Variable ;
-	om:hasDimension om:acceleration-Dimension .
-
-:eqLinear rdf:type scal:Equation ;
+:equation rdf:type trans:GainOffsetNotation;
 	# y = a * x + b
-	scal:hasMathMLDefinition
-	'''<apply>
-		<eq/>
-		<ci>:output</ci>
-		<apply>
-			<sum/>
-			<apply>
-				<times/>
-				<ci>:gain</ci>
-				<ci>:input</ci>
-			</apply>
-			<ci>:gain</ci>
-		</apply>
-	</apply>''' .
+	trans:hasGain :gain ;
+	trans:hasOffset :offset .
 
-:model rdf:type owl:NamedIndividual , scal:EquationModel ;
-	scal:hasEquation :eqLinear ;
-	scal:hasParameter :gain ;
-	scal:hasParameter :offset ;
-	scal:hasVariable :input ;
-	scal:hasVariable :output .
+:calibrationPeriod rdf:type ssn-system:Condition ;
+	schema:startDate "2022-04-21T20:00" ;
+	schema:endDate "2026-04-20T00:00" .
+
+:model rdf:type owl:NamedIndividual , trans:LinearAffineModel;
+	trans:isExpressedBy :equation ;
+	ssn-system:inCondition :calibrationPeriod .

@@ -151,7 +151,12 @@
 
 
 :LinearAffineModel rdf:type owl:Class ;
-  rdfs:subClassOf :TransferModel ;
+  rdfs:subClassOf :TransferModel , 
+    [ rdf:type owl:Restriction ;
+      owl:onProperty :isExpressedBy ;
+      owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onClass :GainOffsetNotation
+    ];
   :isDefinedInDomain :TimeDomain ;
   :hasBehavior :Static ;
   :isOfSystemType :NonlinearSystem .
@@ -307,7 +312,19 @@ with internal state x, state's time derivate x_dot, input u, output y."""@en ,
     owl:onClass :Array
   ] .
 
-
+:GainOffsetNotation rdf:type owl:Class ;
+  rdfs:subClassOf :MathematicalObject ,
+  [ rdf:type owl:Restriction ;
+    owl:onProperty :hasGain ;
+    owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+    owl:onClass om:Measure
+  ] ,
+  [ rdf:type owl:Restriction ;
+    owl:onProperty :hasOffset ;
+    owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+    owl:onClass om:Measure
+  ] ;
+  rdfs:comment "Linear affine model: y = gain * x + offset" .
 
 # relations for MathematicalObject
 
@@ -315,6 +332,16 @@ with internal state x, state's time derivate x_dot, input u, output y."""@en ,
   rdfs:subPropertyOf om:hasValue ;
   schema:domainIncludes :MathematicalObject ;
   schema:rangeIncludes :Array .
+
+:hasGain rdf:type owl:ObjectProperty ;
+  rdfs:subPropertyOf om:hasValue ;
+  schema:domainIncludes :MathematicalObject ;
+  schema:rangeIncludes om:Measure .
+
+:hasOffset rdf:type owl:ObjectProperty ;
+  rdfs:subPropertyOf om:hasValue ;
+  schema:domainIncludes :MathematicalObject ;
+  schema:rangeIncludes om:Measure .
 
 :hasCoordinates rdf:type owl:ObjectProperty ;
   rdfs:subPropertyOf :hasArrayDefinition .
