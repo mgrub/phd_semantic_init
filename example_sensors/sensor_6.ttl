@@ -13,9 +13,10 @@
 @prefix :      <http://www.example.com/ns/S6/> .
 
 :sensor
-    a owl:NamedIndividual , sosa:Sensor;
-    sosa:isHostedBy local:location_A;
-    sosa:observes local:acceleration .
+    a owl:NamedIndividual , sosa:Sensor ;
+    sosa:isHostedBy local:location_A ;
+    sosa:observes local:acceleration ;
+    ssn:hasProperty :model .
 
 # if an observation was made by this sensor, it has the unit 'm/s^2'
 :uses_unit 
@@ -39,3 +40,6 @@ local:acceleration
 
 local:location_A 
     rdf:type owl:NamedIndividual , scal:Location .
+
+:model 
+    rdf:type owl:NamedIndividual , trans:LinearAffineModel .
