@@ -111,20 +111,24 @@ WHERE {
 flatten_list = lambda l : [item[0] for item in l]
 
 # sensors at same location as "TARGET"
-res = owl.default_world.sparql(prefixes + query_same_location.format(TARGET="sensor_1:sensor"))
+res = owl.default_world.sparql(prefixes + query_same_location.format(TARGET="sensor_6:sensor"))
 same_location = flatten_list(res)
+print(f"same_location={same_location}")
 
 # sensors measuring same measurand as "TARGET"
-res = owl.default_world.sparql(prefixes + query_same_observable_property.format(TARGET="sensor_1:sensor"))
+res = owl.default_world.sparql(prefixes + query_same_observable_property.format(TARGET="sensor_6:sensor"))
 same_measurand = flatten_list(res)
+print(f"same_measurand={same_measurand}")
 
 # sensors measuring same quantity kind as "TARGET"
-res = owl.default_world.sparql(prefixes + query_same_observed_quantity.format(TARGET="sensor_1:sensor"))
+res = owl.default_world.sparql(prefixes + query_same_observed_quantity.format(TARGET="sensor_6:sensor"))
 same_quantity = flatten_list(res)
+print(f"same_quantity={same_quantity}")
 
 # sensors with calibration models
 res = owl.default_world.sparql(prefixes + query_calibrated_sensors)
 with_calibration_model = flatten_list(res)
+print(f"with_calibration_model={with_calibration_model}")
 
 
 # get the intersection of the relevant results

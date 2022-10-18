@@ -14,7 +14,7 @@
 
 :sensor
     a owl:NamedIndividual , sosa:Sensor;
-    sosa:isHostedBy local:location_A;
+    sosa:isHostedBy local:location_B;
     sosa:observes local:acceleration;
     ssn:hasProperty :model .
 
