@@ -61,9 +61,6 @@ WHERE {{
 }}
 """
 
-    # FILTER( ?l1 = ?l2 ) .
-    # FILTER( ?s != {TARGET} )
-
 query_same_observable_property = """
 SELECT ?s
 WHERE {{
@@ -90,6 +87,13 @@ WHERE {
     ?s a/rdfs:subClassOf* sosa:Sensor ;
         ssn:hasProperty ?prop .
     ?prop a/rdfs:subClassOf* scal:CalibrationModel .
+    OPTIONAL { 
+        ?prop ssn-system:inCondition ?cond .
+        ?cond schema:startDate ?start .
+        ?cond schema:endDate ?end .
+    } 
+    FILTER( !BOUND(?start) || ?start <= NOW() ) .
+    FILTER( !BOUND(?end) || NOW() <= ?end ) .
 }
 """
 
@@ -127,10 +131,9 @@ print(f"same_quantity={same_quantity}")
 
 # sensors with calibration models
 res = owl.default_world.sparql(prefixes + query_calibrated_sensors)
-with_calibration_model = flatten_list(res)
-print(f"with_calibration_model={with_calibration_model}")
-
+with_valid_calibration_model = flatten_list(res)
+print(f"with_valid_calibration_model={with_valid_calibration_model}")
 
 # get the intersection of the relevant results
-result = list(set.intersection(*map(set, [same_location, same_measurand, with_calibration_model])))
+result = list(set.intersection(*map(set, [same_location, same_measurand, with_valid_calibration_model])))
 print(result)
