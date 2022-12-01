@@ -97,10 +97,13 @@ for c in class_names:
     best = np.argmax(res)
     #print(c, res[best], keywords[best])
 
-    results[c] = {
-        "jaro_winkler_partner" : keywords[best][0],
-        "jaro_winkler_similarity": res[best],
-    }
+    if res[best] >= 0.77:
+        results[c] = {
+            "jaro_winkler_partner" : keywords[best][0],
+            "jaro_winkler_similarity": res[best],
+        }
+    else:
+        results[c] = None
 
 f = open(results_file, "w")
 json.dump(results, f, indent=4)
