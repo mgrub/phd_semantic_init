@@ -11,279 +11,279 @@
 @prefix si:     <https://ptb.de/si#> .
 
 @prefix math: <http://cll.niimm.ksu.ru/ontologies/mathematics#> .
-@prefix :     <http://www.example.com/ns/trans/> .
+@prefix trans:     <http://www.example.com/ns/trans/> .
 
 
-: rdf:type owl:Ontology ;
+trans: rdf:type owl:Ontology ;
   rdfs:label "Sensor Dynamic Transfer Behavior Ontology (trans)"@en .
 
 
 
 # main concepts
 
-:TransferModel rdf:type owl:Class ;
+trans:TransferModel rdf:type owl:Class ;
   rdfs:subClassOf 
     scal:CalibrationModel ,
     [ rdf:type owl:Restriction ;
-      owl:onProperty :isExpressedBy ;
+      owl:onProperty trans:isExpressedBy ;
       owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-      owl:onClass :MathematicalObject
+      owl:onClass trans:MathematicalObject
     ] .
 
-:MathematicalObject rdf:type owl:Class ;
+trans:MathematicalObject rdf:type owl:Class ;
   rdfs:subClassOf math:E34 .
 
-:AnalyticalDomain rdf:type owl:Class ;
+trans:AnalyticalDomain rdf:type owl:Class ;
   rdfs:comment "The domain in which the transfer behavior is represented/analyzed"@en .
 
-:SystemType rdf:type owl:Class .
+trans:SystemType rdf:type owl:Class .
 
-:QualitativeBehavior rdf:type owl:Class .
+trans:QualitativeBehavior rdf:type owl:Class .
 
 
 
 # main relations
 
-:isExpressedBy rdf:type owl:ObjectProperty ;
-  schema:domainIncludes :TransferModel ;
-  schema:rangeIncludes :MathematicalObject .
+trans:isExpressedBy rdf:type owl:ObjectProperty ;
+  schema:domainIncludes trans:TransferModel ;
+  schema:rangeIncludes trans:MathematicalObject .
 
-:isDefinedInDomain rdf:type owl:ObjectProperty ;
-  schema:domainIncludes :TransferModel ;
-  schema:rangeIncludes :AnalyticDomain .
+trans:isDefinedInDomain rdf:type owl:ObjectProperty ;
+  schema:domainIncludes trans:TransferModel ;
+  schema:rangeIncludes trans:AnalyticDomain .
 
-:isOfSystemType rdf:type owl:ObjectProperty ;
-  schema:domainIncludes :TransferModel ;
-  schema:rangeIncludes :SystemType .
+trans:isOfSystemType rdf:type owl:ObjectProperty ;
+  schema:domainIncludes trans:TransferModel ;
+  schema:rangeIncludes trans:SystemType .
 
-:hasBehavior rdf:type owl:ObjectProperty ;
-  schema:domainIncludes :TransferModel ;
-  schema:rangeIncludes :QualitativeBehavior .
+trans:hasBehavior rdf:type owl:ObjectProperty ;
+  schema:domainIncludes trans:TransferModel ;
+  schema:rangeIncludes trans:QualitativeBehavior .
 
-:hasValueStructure rdf:type owl:ObjectProperty ,
+trans:hasValueStructure rdf:type owl:ObjectProperty ,
   owl:FunctionalProperty ;
-  schema:domainIncludes :TransferModel ;
-  schema:rangeIncludes :DimensionStructure .
+  schema:domainIncludes trans:TransferModel ;
+  schema:rangeIncludes trans:DimensionStructure .
 
-:hasFrequencyStructure rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf :hasValueStructure .
+trans:hasFrequencyStructure rdf:type owl:ObjectProperty ;
+  rdfs:subPropertyOf trans:hasValueStructure .
 
-:hasTimeStructure rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf :hasValueStructure .
+trans:hasTimeStructure rdf:type owl:ObjectProperty ;
+  rdfs:subPropertyOf trans:hasValueStructure .
 
 
 
 # classes derived from TransferModel
 
-:FilterType rdf:type owl:Class ;
-  rdfs:subClassOf :TransferModel ;
-  :isDefinedInDomain :FrequencyDomain ;
-  :hasBehavior :FrequencyBehavior .
+trans:FilterType rdf:type owl:Class ;
+  rdfs:subClassOf trans:TransferModel ;
+  trans:isDefinedInDomain trans:FrequencyDomain ;
+  trans:hasBehavior trans:FrequencyBehavior .
 
-:Chebyshev rdf:type owl:Class ;
-  rdfs:subClassOf :FilterType ,
+trans:Chebyshev rdf:type owl:Class ;
+  rdfs:subClassOf trans:FilterType ,
   [ rdf:type owl:Restriction ;
-    owl:onProperty :isExpressedBy ;
+    owl:onProperty trans:isExpressedBy ;
     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-    owl:onClass :Polynomial
+    owl:onClass trans:Polynomial
   ] .
 
-:Butterworth rdf:type owl:Class ;
-  rdfs:subClassOf :FilterType .
+trans:Butterworth rdf:type owl:Class ;
+  rdfs:subClassOf trans:FilterType .
 
-:Bessel rdf:type owl:Class ;
-  rdfs:subClassOf :FilterType ,
+trans:Bessel rdf:type owl:Class ;
+  rdfs:subClassOf trans:FilterType ,
   [ rdf:type owl:Restriction ;
-    owl:onProperty :isExpressedBy ;
+    owl:onProperty trans:isExpressedBy ;
     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-    owl:onClass :Polynomial
+    owl:onClass trans:Polynomial
   ] .
 
-:Elliptic rdf:type owl:Class ;
-  rdfs:subClassOf :FilterType ,
+trans:Elliptic rdf:type owl:Class ;
+  rdfs:subClassOf trans:FilterType ,
   [ rdf:type owl:Restriction ;
-    owl:onProperty :isExpressedBy ;
+    owl:onProperty trans:isExpressedBy ;
     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-    owl:onClass :EllipticRationalFunction
+    owl:onClass trans:EllipticRationalFunction
   ] .
 
 
-:StepResponseModel rdf:type owl:Class ;
-  rdfs:subClassOf :TransferModel ;
-  :hasBehavior :Dynamic ;
-  :isDefinedInDomain :TimeDomain ;
-  :isOfSystemType :LinearSystem .
+trans:StepResponseModel rdf:type owl:Class ;
+  rdfs:subClassOf trans:TransferModel ;
+  trans:hasBehavior trans:Dynamic ;
+  trans:isDefinedInDomain trans:TimeDomain ;
+  trans:isOfSystemType trans:LinearSystem .
 
-:ImpulseResponseModel rdf:type owl:Class ;
-  rdfs:subClassOf :TransferModel ,
+trans:ImpulseResponseModel rdf:type owl:Class ;
+  rdfs:subClassOf trans:TransferModel ,
   [ rdf:type owl:Restriction ;
-    owl:onProperty :isDefinedInDomain ;
+    owl:onProperty trans:isDefinedInDomain ;
     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     owl:onClass [ rdf:type owl:Class ;
-      owl:unionOf ( :FrequencyDomain :TimeDomain )
+      owl:unionOf ( trans:FrequencyDomain trans:TimeDomain )
     ]
   ] ;
-  :hasBehavior :Dynamic .
+  trans:hasBehavior trans:Dynamic .
 
-:ContinuousImpulseResponseModel rdf:type owl:Class ;
-  rdfs:subClassOf :ImpulseResponseModel ;
-  :isOfSystemType :LinearSystem .
+trans:ContinuousImpulseResponseModel rdf:type owl:Class ;
+  rdfs:subClassOf trans:ImpulseResponseModel ;
+  trans:isOfSystemType trans:LinearSystem .
 
-:InfiniteImpulseResponseModel rdf:type owl:Class ;
-  rdfs:subClassOf :ImpulseResponseModel ,
+trans:InfiniteImpulseResponseModel rdf:type owl:Class ;
+  rdfs:subClassOf trans:ImpulseResponseModel ,
   [ rdf:type owl:Restriction ;
-    owl:onProperty :isExpressedBy ;
+    owl:onProperty trans:isExpressedBy ;
     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     owl:onClass [ rdf:type owl:Class ;
-      owl:unionOf ( :LinearDifferenceEquation :RationalFraction )
+      owl:unionOf ( trans:LinearDifferenceEquation trans:RationalFraction )
     ]
   ] .
 
-:FiniteImpulseResponseModel rdf:type owl:Class ;
-  rdfs:subClassOf :ImpulseResponseModel ,
+trans:FiniteImpulseResponseModel rdf:type owl:Class ;
+  rdfs:subClassOf trans:ImpulseResponseModel ,
   [ rdf:type owl:Restriction ;
-    owl:onProperty :isExpressedBy ;
+    owl:onProperty trans:isExpressedBy ;
     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     owl:onClass [ rdf:type owl:Class ;
-      owl:unionOf ( :LinearDifferenceEquation :Polynomial )
+      owl:unionOf ( trans:LinearDifferenceEquation trans:Polynomial )
     ]
   ] .
 
 
-:LinearAffineModel rdf:type owl:Class ;
-  rdfs:subClassOf :TransferModel , 
+trans:LinearAffineModel rdf:type owl:Class ;
+  rdfs:subClassOf trans:TransferModel , 
     [ rdf:type owl:Restriction ;
-      owl:onProperty :isExpressedBy ;
+      owl:onProperty trans:isExpressedBy ;
       owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-      owl:onClass :GainOffsetNotation
+      owl:onClass trans:GainOffsetNotation
     ];
-  :isDefinedInDomain :TimeDomain ;
-  :hasBehavior :Static ;
-  :isOfSystemType :NonlinearSystem .
+  trans:isDefinedInDomain trans:TimeDomain ;
+  trans:hasBehavior trans:Static ;
+  trans:isOfSystemType trans:NonlinearSystem .
 
 
-:StateSpaceModel rdf:type owl:Class ;
-  rdfs:subClassOf :TransferModel ;
-  :isDefinedInDomain :TimeDomain ;
-  :hasBehavior :Dynamic .
+trans:StateSpaceModel rdf:type owl:Class ;
+  rdfs:subClassOf trans:TransferModel ;
+  trans:isDefinedInDomain trans:TimeDomain ;
+  trans:hasBehavior trans:Dynamic .
 
-:LinearStateSpaceModel rdf:type owl:Class ;
-  rdfs:subClassOf :StateSpaceModel ,
+trans:LinearStateSpaceModel rdf:type owl:Class ;
+  rdfs:subClassOf trans:StateSpaceModel ,
   [ rdf:type owl:Restriction ;
-    owl:onProperty :isExpressedBy ;
+    owl:onProperty trans:isExpressedBy ;
     owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-    owl:onClass :StateSpaceMatrixNotation
+    owl:onClass trans:StateSpaceMatrixNotation
   ] .
 
-:NonLinearStateSpaceModel rdf:type owl:Class ;
-  rdfs:subClassOf :StateSpaceModel ;
-  :isOfSystemType :NonlinearSystem .
+trans:NonLinearStateSpaceModel rdf:type owl:Class ;
+  rdfs:subClassOf trans:StateSpaceModel ;
+  trans:isOfSystemType trans:NonlinearSystem .
 
 
 
 # classes derived from MathematicalObject
 
-:Array rdf:type owl:Class ;
-  rdfs:subClassOf :MathematicalObject ,
+trans:Array rdf:type owl:Class ;
+  rdfs:subClassOf trans:MathematicalObject ,
   om:Measure ,
   [ rdf:type owl:Restriction ;
     owl:onProperty om:hasNumericalValue ;
     owl:allValuesFrom [ rdf:type rdfs:Datatype ;
       owl:unionOf ( 
-        :MathMLLiteral
-        :TeXLiteral
+        trans:MathMLLiteral
+        trans:TeXLiteral
         rdf:XMLLiteral
       )
     ]
   ] ;
   rdfs:seeAlso math:E1687 .
 
-:ArrayWithUncertainty rdf:type owl:Class ;
+trans:ArrayWithUncertainty rdf:type owl:Class ;
   rdfs:subClassOf si:MeasureWithUncertainty ,
-  :Array .
+  trans:Array .
 
-:FrequencySpectrum rdf:type owl:Class ;
-  rdfs:subClassOf :MathematicalObject ,
+trans:FrequencySpectrum rdf:type owl:Class ;
+  rdfs:subClassOf trans:MathematicalObject ,
   [ rdf:type owl:Restriction ;
-    owl:onProperty :hasFrequencyArray ;
+    owl:onProperty trans:hasFrequencyArray ;
     owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-    owl:onClass :Array
+    owl:onClass trans:Array
   ] ,
   [ rdf:type owl:Restriction ;
-    owl:onProperty :hasValueArray ;
+    owl:onProperty trans:hasValueArray ;
     owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-    owl:onClass :Array
+    owl:onClass trans:Array
   ] .
 
-:LinearDifferenceEquation rdf:type owl:Class ;
-  rdfs:subClassOf :MathematicalObject ,
+trans:LinearDifferenceEquation rdf:type owl:Class ;
+  rdfs:subClassOf trans:MathematicalObject ,
   [ rdf:type owl:Restriction ;
-    owl:onProperty :hasCoefficients ;
+    owl:onProperty trans:hasCoefficients ;
     owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
-    owl:onClass :Array
+    owl:onClass trans:Array
   ] .
 
-:LinearOrdinaryDifferentialEquation rdf:type owl:Class ;
+trans:LinearOrdinaryDifferentialEquation rdf:type owl:Class ;
   owl:equivalentClass math:E2822 ;
-  rdfs:subClassOf :MathematicalObject ,
+  rdfs:subClassOf trans:MathematicalObject ,
   [ rdf:type owl:Restriction ;
-    owl:onProperty :hasCoefficients ;
+    owl:onProperty trans:hasCoefficients ;
     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-    owl:onClass :Array
+    owl:onClass trans:Array
   ] .
 
-:Polynomial rdf:type owl:Class ;
+trans:Polynomial rdf:type owl:Class ;
   owl:equivalentClass math:E1995 ;
-  rdfs:subClassOf :MathematicalObject ,
+  rdfs:subClassOf trans:MathematicalObject ,
   [ rdf:type owl:Restriction ;
-    owl:onProperty :hasCoefficients ;
-    owl:allValuesFrom :Array
+    owl:onProperty trans:hasCoefficients ;
+    owl:allValuesFrom trans:Array
   ] ,
   [ rdf:type owl:Restriction ;
-    owl:onProperty :hasPolynomialRoots ;
-    owl:onClass :Array
+    owl:onProperty trans:hasPolynomialRoots ;
+    owl:onClass trans:Array
   ] ;
   rdfs:comment "An expression consisting of variables (also called indeterminates) and coefficients, that involves only the operations of addition, subtraction, multiplication, and non-negative integer exponentiation of variables"@en .
 
-:RationalFraction rdf:type owl:Class ;
-  rdfs:subClassOf :MathematicalObject ,
+trans:RationalFraction rdf:type owl:Class ;
+  rdfs:subClassOf trans:MathematicalObject ,
   [ rdf:type owl:Restriction ;
-    owl:onProperty :hasDenominator ;
+    owl:onProperty trans:hasDenominator ;
     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-    owl:onClass :Polynomial
+    owl:onClass trans:Polynomial
   ] ,
   [ rdf:type owl:Restriction ;
-    owl:onProperty :hasNumerator ;
+    owl:onProperty trans:hasNumerator ;
     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-    owl:onClass :Polynomial
+    owl:onClass trans:Polynomial
   ] ;
   rdfs:comment "A rational fraction given by its numerator- and denominator-polynomial."@en ;
   rdfs:seeAlso math:E1603 .
 
-:EllipticRationalFunction rdf:type owl:Class ;
-  rdfs:subClassOf :RationalFraction .
+trans:EllipticRationalFunction rdf:type owl:Class ;
+  rdfs:subClassOf trans:RationalFraction .
 
-:StateSpaceMatrixNotation rdf:type owl:Class ;
-  rdfs:subClassOf :MathematicalObject ,
+trans:StateSpaceMatrixNotation rdf:type owl:Class ;
+  rdfs:subClassOf trans:MathematicalObject ,
   [ rdf:type owl:Restriction ;
-    owl:onProperty :hasFeedthroughMatrix ;
+    owl:onProperty trans:hasFeedthroughMatrix ;
     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-    owl:onClass :Array
+    owl:onClass trans:Array
   ] ,
   [ rdf:type owl:Restriction ;
-    owl:onProperty :hasInputMatrix ;
+    owl:onProperty trans:hasInputMatrix ;
     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-    owl:onClass :Array
+    owl:onClass trans:Array
   ] ,
   [ rdf:type owl:Restriction ;
-    owl:onProperty :hasOutputMatrix ;
+    owl:onProperty trans:hasOutputMatrix ;
     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-    owl:onClass :Array
+    owl:onClass trans:Array
   ] ,
   [ rdf:type owl:Restriction ;
-    owl:onProperty :hasSystemMatrix ;
+    owl:onProperty trans:hasSystemMatrix ;
     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-    owl:onClass :Array
+    owl:onClass trans:Array
   ] ;
   rdfs:comment """Depending on chosen time-dimension structure (continuous / discrete) the matrices represent a system of differential or difference equations. 
 
@@ -299,28 +299,28 @@ with internal state x, state's time derivate x_dot, input u, output y."""@en ,
   "State Space Model represented by its system Matrix A, input matrix B, output matrix C and feedthrough matrix D."@en ;
   rdfs:seeAlso math:E2823 .
 
-:TimeSeries rdf:type owl:Class ;
-  rdfs:subClassOf :MathematicalObject ,
+trans:TimeSeries rdf:type owl:Class ;
+  rdfs:subClassOf trans:MathematicalObject ,
   [ rdf:type owl:Restriction ;
-    owl:onProperty :hasValueArray ;
+    owl:onProperty trans:hasValueArray ;
     owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-    owl:onClass :Array
+    owl:onClass trans:Array
   ] ,
   [ rdf:type owl:Restriction ;
-    owl:onProperty :hasTimeArray ;
+    owl:onProperty trans:hasTimeArray ;
     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-    owl:onClass :Array
+    owl:onClass trans:Array
   ] .
 
-:GainOffsetNotation rdf:type owl:Class ;
-  rdfs:subClassOf :MathematicalObject ,
+trans:GainOffsetNotation rdf:type owl:Class ;
+  rdfs:subClassOf trans:MathematicalObject ,
   [ rdf:type owl:Restriction ;
-    owl:onProperty :hasGain ;
+    owl:onProperty trans:hasGain ;
     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     owl:onClass om:Measure
   ] ,
   [ rdf:type owl:Restriction ;
-    owl:onProperty :hasOffset ;
+    owl:onProperty trans:hasOffset ;
     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     owl:onClass om:Measure
   ] ;
@@ -328,139 +328,139 @@ with internal state x, state's time derivate x_dot, input u, output y."""@en ,
 
 # relations for MathematicalObject
 
-:hasArrayDefinition rdf:type owl:ObjectProperty ;
+trans:hasArrayDefinition rdf:type owl:ObjectProperty ;
   rdfs:subPropertyOf om:hasValue ;
-  schema:domainIncludes :MathematicalObject ;
-  schema:rangeIncludes :Array .
+  schema:domainIncludes trans:MathematicalObject ;
+  schema:rangeIncludes trans:Array .
 
-:hasGain rdf:type owl:ObjectProperty ;
+trans:hasGain rdf:type owl:ObjectProperty ;
   rdfs:subPropertyOf om:hasValue ;
-  schema:domainIncludes :MathematicalObject ;
+  schema:domainIncludes trans:MathematicalObject ;
   schema:rangeIncludes om:Measure .
 
-:hasOffset rdf:type owl:ObjectProperty ;
+trans:hasOffset rdf:type owl:ObjectProperty ;
   rdfs:subPropertyOf om:hasValue ;
-  schema:domainIncludes :MathematicalObject ;
+  schema:domainIncludes trans:MathematicalObject ;
   schema:rangeIncludes om:Measure .
 
-:hasCoordinates rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf :hasArrayDefinition .
+trans:hasCoordinates rdf:type owl:ObjectProperty ;
+  rdfs:subPropertyOf trans:hasArrayDefinition .
 
-:hasTimeArray rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf :hasCoordinates ;
-  schema:domainIncludes :TimeSeries .
+trans:hasTimeArray rdf:type owl:ObjectProperty ;
+  rdfs:subPropertyOf trans:hasCoordinates ;
+  schema:domainIncludes trans:TimeSeries .
 
-:hasFrequencyArray rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf :hasCoordinates ;
-  schema:domainIncludes :FrequencySpectrum .
+trans:hasFrequencyArray rdf:type owl:ObjectProperty ;
+  rdfs:subPropertyOf trans:hasCoordinates ;
+  schema:domainIncludes trans:FrequencySpectrum .
 
-:hasValueArray rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf :hasArrayDefinition .
+trans:hasValueArray rdf:type owl:ObjectProperty ;
+  rdfs:subPropertyOf trans:hasArrayDefinition .
 
-:hasCoefficients rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf :hasArrayDefinition ;
+trans:hasCoefficients rdf:type owl:ObjectProperty ;
+  rdfs:subPropertyOf trans:hasArrayDefinition ;
   rdfs:comment "A polynomial is defined by its coefficients stored in an array." .
 
-:hasPolynomialRoots rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf :hasArrayDefinition ;
-  schema:domainIncludes :Polynomial ;
+trans:hasPolynomialRoots rdf:type owl:ObjectProperty ;
+  rdfs:subPropertyOf trans:hasArrayDefinition ;
+  schema:domainIncludes trans:Polynomial ;
   rdfs:comment "A polynomial is defined by its roots stored in an array." .
 
-:hasNumerator rdf:type owl:ObjectProperty ;
-  schema:domainIncludes :RationalFraction ;
-  schema:rangeIncludes :Polynomial .
+trans:hasNumerator rdf:type owl:ObjectProperty ;
+  schema:domainIncludes trans:RationalFraction ;
+  schema:rangeIncludes trans:Polynomial .
 
-:hasDenominator rdf:type owl:ObjectProperty ;
-  schema:domainIncludes :RationalFraction ;
-  schema:rangeIncludes :Polynomial .
+trans:hasDenominator rdf:type owl:ObjectProperty ;
+  schema:domainIncludes trans:RationalFraction ;
+  schema:rangeIncludes trans:Polynomial .
 
-:hasSystemMatrix rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf :hasArrayDefinition ;
-  schema:domainIncludes :StateSpaceMatrixNotation ;
-  schema:rangeIncludes :Array .
+trans:hasSystemMatrix rdf:type owl:ObjectProperty ;
+  rdfs:subPropertyOf trans:hasArrayDefinition ;
+  schema:domainIncludes trans:StateSpaceMatrixNotation ;
+  schema:rangeIncludes trans:Array .
 
-:hasInputMatrix rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf :hasArrayDefinition ;
-  schema:domainIncludes :StateSpaceMatrixNotation ;
-  schema:rangeIncludes :Array .
+trans:hasInputMatrix rdf:type owl:ObjectProperty ;
+  rdfs:subPropertyOf trans:hasArrayDefinition ;
+  schema:domainIncludes trans:StateSpaceMatrixNotation ;
+  schema:rangeIncludes trans:Array .
 
-:hasFeedthroughMatrix rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf :hasArrayDefinition ;
-  schema:domainIncludes :StateSpaceMatrixNotation ;
-  schema:rangeIncludes :Array .
+trans:hasFeedthroughMatrix rdf:type owl:ObjectProperty ;
+  rdfs:subPropertyOf trans:hasArrayDefinition ;
+  schema:domainIncludes trans:StateSpaceMatrixNotation ;
+  schema:rangeIncludes trans:Array .
 
-:hasOutputMatrix rdf:type owl:ObjectProperty ;
-  rdfs:subPropertyOf :hasArrayDefinition ;
-  schema:domainIncludes :StateSpaceMatrixNotation ;
-  schema:rangeIncludes :Array .
+trans:hasOutputMatrix rdf:type owl:ObjectProperty ;
+  rdfs:subPropertyOf trans:hasArrayDefinition ;
+  schema:domainIncludes trans:StateSpaceMatrixNotation ;
+  schema:rangeIncludes trans:Array .
 
 
 
 # additional properties of TransferModel
 
-:FrequencyBehavior rdf:type owl:Class ;
-  rdfs:subClassOf :QualitativeBehavior .
+trans:FrequencyBehavior rdf:type owl:Class ;
+  rdfs:subClassOf trans:QualitativeBehavior .
 
-:LowPass rdf:type owl:Class ;
-  rdfs:subClassOf :FrequencyBehavior .
+trans:LowPass rdf:type owl:Class ;
+  rdfs:subClassOf trans:FrequencyBehavior .
 
-:HighPass rdf:type owl:Class ;
-  rdfs:subClassOf :FrequencyBehavior .
+trans:HighPass rdf:type owl:Class ;
+  rdfs:subClassOf trans:FrequencyBehavior .
 
-:BandPass rdf:type owl:Class ;
-  rdfs:subClassOf :FrequencyBehavior .
+trans:BandPass rdf:type owl:Class ;
+  rdfs:subClassOf trans:FrequencyBehavior .
 
-:BandStop rdf:type owl:Class ;
-  rdfs:subClassOf :FrequencyBehavior .
+trans:BandStop rdf:type owl:Class ;
+  rdfs:subClassOf trans:FrequencyBehavior .
 
 
-:TemporalBehavior rdf:type owl:Class ;
-  rdfs:subClassOf :QualitativeBehavior .
+trans:TemporalBehavior rdf:type owl:Class ;
+  rdfs:subClassOf trans:QualitativeBehavior .
 
-:Dynamic rdf:type owl:Class ;
-  rdfs:subClassOf :TemporalBehavior ;
+trans:Dynamic rdf:type owl:Class ;
+  rdfs:subClassOf trans:TemporalBehavior ;
   rdfs:comment "System response can depend on the history of input values."@en .
 
-:Static rdf:type owl:Class ;
-  rdfs:subClassOf :TemporalBehavior ;
+trans:Static rdf:type owl:Class ;
+  rdfs:subClassOf trans:TemporalBehavior ;
   rdfs:comment "System response is only dependent on the last input value."@en .
 
-:LinearSystem rdf:type owl:Class ;
-  rdfs:subClassOf :SystemType ;
-  owl:disjointWith :NonlinearSystem .
+trans:LinearSystem rdf:type owl:Class ;
+  rdfs:subClassOf trans:SystemType ;
+  owl:disjointWith trans:NonlinearSystem .
 
-:LTISystem rdf:type owl:Class ;
-  rdfs:subClassOf :LinearSystem .
+trans:LTISystem rdf:type owl:Class ;
+  rdfs:subClassOf trans:LinearSystem .
 
-:NonlinearSystem rdf:type owl:Class ;
-  rdfs:subClassOf :SystemType .
+trans:NonlinearSystem rdf:type owl:Class ;
+  rdfs:subClassOf trans:SystemType .
 
 
-:FrequencyDomain rdf:type owl:Class ;
-  rdfs:subClassOf :AnalyticalDomain .
+trans:FrequencyDomain rdf:type owl:Class ;
+  rdfs:subClassOf trans:AnalyticalDomain .
 
-:TimeDomain rdf:type owl:Class ;
-  rdfs:subClassOf :AnalyticalDomain .
+trans:TimeDomain rdf:type owl:Class ;
+  rdfs:subClassOf trans:AnalyticalDomain .
 
-:DimensionStructure rdf:type owl:Class .
+trans:DimensionStructure rdf:type owl:Class .
 
-:Continuous rdf:type owl:Class ;
-  rdfs:subClassOf :DimensionStructure ;
-  owl:disjointWith :Discrete ;
+trans:Continuous rdf:type owl:Class ;
+  rdfs:subClassOf trans:DimensionStructure ;
+  owl:disjointWith trans:Discrete ;
   rdfs:comment "The values along a dimension are represented by continuous points."@en .
 
-:Discrete rdf:type owl:Class ;
-  rdfs:subClassOf :DimensionStructure ;
+trans:Discrete rdf:type owl:Class ;
+  rdfs:subClassOf trans:DimensionStructure ;
   rdfs:comment "The values along a dimension are represented by discrete points."@en .
 
 
 
 # Datatypes
 
-:MathMLLiteral rdf:type rdfs:Datatype ;
+trans:MathMLLiteral rdf:type rdfs:Datatype ;
   owl:equivalentClass rdf:XMLLiteral .
 
-:TeXLiteral rdf:type rdfs:Datatype ;
+trans:TeXLiteral rdf:type rdfs:Datatype ;
   owl:equivalentClass xsd:string .
 
 
@@ -468,17 +468,17 @@ with internal state x, state's time derivate x_dot, input u, output y."""@en ,
 # General axioms
 
 [ rdf:type owl:AllDisjointClasses ;
-  owl:members ( :BandPass
-  :BandStop
-  :HighPass
-  :LowPass
+  owl:members ( trans:BandPass
+  trans:BandStop
+  trans:HighPass
+  trans:LowPass
   )
 ] .
 
 [ rdf:type owl:AllDisjointClasses ;
-  owl:members ( :Bessel
-  :Butterworth
-  :Chebyshev
-  :Elliptic
+  owl:members ( trans:Bessel
+  trans:Butterworth
+  trans:Chebyshev
+  trans:Elliptic
   )
 ] .
