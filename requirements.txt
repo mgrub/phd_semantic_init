@@ -1,2 +1,6 @@
 rdflib
 owlready2
+pdfplumber
+spacy
+yake
+jellyfish
