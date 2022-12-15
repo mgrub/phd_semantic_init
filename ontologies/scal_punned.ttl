@@ -1,0 +1,148 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix ontoclean: <http://www.meteck.org/teaching/ontologies/ontoclean-dl.owl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ssn: <http://www.w3.org/ns/ssn/> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix om: <http://www.ontology-of-units-of-measure.org/resource/om-2/>.
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+
+@prefix scal: <http://www.example.com/ns/scal/> .
+
+scal: a owl:Ontology ;
+  dcterms:title "Sensor Calibration Ontology"@en ;
+  owl:imports <http://www.meteck.org/teaching/ontologies/ontoclean-dl.owl> .
+
+### Test
+# scal:A a owl:NamedIndividual  ;
+#   a ontoclean:Class ;
+#   a ontoclean:RigidClass ; 
+#   a ontoclean:UnityClass ; 
+#   a ontoclean:SortalClass ; 
+#   a ontoclean:DependentClass . 
+
+# scal:B a owl:NamedIndividual  ;
+#   ontoclean:subClassOf scal:A ;
+#   a ontoclean:Class ;
+#   a ontoclean:NonRigidClass ; 
+#   a ontoclean:NonUnityClass ; 
+#   a ontoclean:NonSortalClass ;
+#   a ontoclean:NonDependentClass . 
+
+# scal:C a owl:NamedIndividual  ;
+#   ontoclean:subClassOf scal:A ;
+#   a ontoclean:Class ;
+#   a ontoclean:RigidClass ; 
+#   a ontoclean:AntiUnityClass ; 
+#   a ontoclean:SortalClass ; 
+#   a ontoclean:DependentClass . 
+
+### Assumed external meta properties
+
+sosa:Platform a owl:NamedIndividual  ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;     # - / Anti / Non
+  a ontoclean:UnityClass ;     # - / Anti / Non
+  a ontoclean:SortalClass ;    # - / Non
+  a ontoclean:NonDependentClass . 
+
+sosa:Result a owl:NamedIndividual  ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;     # - / Anti / Non
+  a ontoclean:UnityClass ;     # - / Anti / Non
+  a ontoclean:SortalClass ;    # - / Non
+  a ontoclean:NonDependentClass . 
+
+geo:SpatialThing a owl:NamedIndividual  ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;     # - / Anti / Non
+  a ontoclean:UnityClass ;     # - / Anti / Non
+  a ontoclean:SortalClass ;    # - / Non
+  a ontoclean:NonDependentClass . 
+
+om:Measure a owl:NamedIndividual  ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;     # - / Anti / Non
+  a ontoclean:UnityClass ;     # - / Anti / Non
+  a ontoclean:SortalClass ;    # - / Non
+  a ontoclean:NonDependentClass . 
+
+om:Quantity a owl:NamedIndividual  ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;     # - / Anti / Non
+  a ontoclean:UnityClass ;     # - / Anti / Non
+  a ontoclean:SortalClass ;    # - / Non
+  a ontoclean:NonDependentClass . 
+
+sosa:Sensor a owl:NamedIndividual  ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;     # - / Anti / Non
+  a ontoclean:UnityClass ;     # - / Anti / Non
+  a ontoclean:SortalClass ;    # - / Non
+  a ontoclean:NonDependentClass . 
+
+
+### Internal meta properties
+
+scal:CalibratedSensor a owl:NamedIndividual  ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;     # - / Anti / Non
+  a ontoclean:UnityClass ;     # - / Anti / Non
+  a ontoclean:SortalClass ;    # - / Non
+  a ontoclean:DependentClass ; # (on CalibrationModel)
+  ontoclean:subClassOf sosa:Sensor .
+
+scal:CalibrationModel a owl:NamedIndividual  .
+
+scal:Location a owl:NamedIndividual  ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;     # - / Anti / Non
+  a ontoclean:UnityClass ;     # - / Anti / Non
+  a ontoclean:SortalClass ;    # - / Non
+  a ontoclean:NonDependentClass ;
+  ontoclean:subClassOf sosa:Platform ;
+  ontoclean:subClassOf geo:SpatialThing .
+
+scal:MeasureWithUncertainty a owl:NamedIndividual  ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;     # - / Anti / Non
+  a ontoclean:UnityClass ;     # - / Anti / Non
+  a ontoclean:SortalClass ;    # - / Non
+  a ontoclean:DependentClass ; # (on uncertainty)
+  ontoclean:subClassOf sosa:Result ;
+  ontoclean:subClassOf om:Measure .
+
+scal:EquationModel a owl:NamedIndividual  ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;     # - / Anti / Non
+  a ontoclean:UnityClass ;     # - / Anti / Non
+  a ontoclean:SortalClass ;    # - / Non
+  a ontoclean:DependentClass ; # (on Variable and Equation)
+  ontoclean:subClassOf scal:CalibrationModel .
+
+scal:Equation a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;     # - / Anti / Non
+  a ontoclean:UnityClass ;     # - / Anti / Non
+  a ontoclean:SortalClass ;    # - / Non
+  a ontoclean:NonDependentClass .
+
+scal:Parameter a owl:NamedIndividual  ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;     # - / Anti / Non
+  a ontoclean:UnityClass ;     # - / Anti / Non
+  a ontoclean:SortalClass ;    # - / Non
+  a ontoclean:NonDependentClass ;
+  ontoclean:subClassOf om:Measure .
+
+scal:Variable a owl:NamedIndividual  ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;     # - / Anti / Non
+  a ontoclean:UnityClass ;     # - / Anti / Non
+  a ontoclean:SortalClass ;    # - / Non
+  a ontoclean:NonDependentClass ;
+  ontoclean:subClassOf om:Quantity .
