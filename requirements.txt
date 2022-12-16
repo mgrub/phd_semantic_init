@@ -4,3 +4,5 @@ pdfplumber
 spacy
 yake
 jellyfish
+pandas
+openpyxl
