@@ -36,13 +36,14 @@ scal:CalibratedSensor a rdfs:Class , owl:Class ;
   rdfs:isDefinedBy scal: . 
 
 scal:CalibrationModel a rdfs:Class , owl:Class ;
+  rdfs:subClassOf ssn:Propertry ;
   rdfs:label "Mathematical Calibration Model"@en ;
   rdfs:isDefinedBy scal: . 
   
 scal:Location a rdfs:Class , owl:Class ;
   rdfs:label "Location of a Sensor"@en ;
   rdfs:subClassOf sosa:Platform ;
-  rdfs:subClassOf geo:SpatialThing ;
+  rdfs:subClassOf geo:SpatialObject ;
   rdfs:isDefinedBy scal: . 
   
 scal:MeasureWithUncertainty a rdfs:Class , owl:Class ;
