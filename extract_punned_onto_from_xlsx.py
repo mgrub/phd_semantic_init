@@ -2,7 +2,7 @@ import os
 import pandas as pd
 
 # what to load
-input_path = os.path.abspath("ontologies/scal_punned.xlsx")
+input_path = os.path.abspath("ontologies/trans_punned.xlsx")
 output_path = os.path.splitext(input_path)[0] + ".ttl"
 
 # read in excel file

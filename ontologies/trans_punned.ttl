@@ -15,7 +15,7 @@
 @prefix trans: <http://www.example.com/ns/trans/> .
    
 trans: a owl:Ontology ;
- dcterms:title "Sensor Dynamic Transfer Behavior Ontology (trans)"@en  ;
+ rdfs:label "Sensor Dynamic Transfer Behavior Ontology (trans)"@en  ;
  owl:imports <http://www.meteck.org/teaching/ontologies/ontoclean-dl.owl> .
 
 
@@ -24,7 +24,7 @@ trans: a owl:Ontology ;
 math:E34 a owl:NamedIndividual ;
   a ontoclean:Class ;
   a ontoclean:RigidClass ;
-  a ontoclean:AntiUnityClass ;
+  a ontoclean:NonUnityClass ;
   a ontoclean:SortalClass ;
   a ontoclean:NonDependentClass .
 
@@ -105,7 +105,7 @@ trans:Butterworth a owl:NamedIndividual ;
   a ontoclean:RigidClass ;
   a ontoclean:UnityClass ;
   a ontoclean:SortalClass ;
-  a ontoclean:NonDependentClass ;
+  a ontoclean:DependentClass ;
   ontoclean:subClassOf trans:FilterType .
 
 trans:Chebyshev a owl:NamedIndividual ;
@@ -129,7 +129,7 @@ trans:ContinuousImpulseResponseModel a owl:NamedIndividual ;
   a ontoclean:RigidClass ;
   a ontoclean:UnityClass ;
   a ontoclean:SortalClass ;
-  a ontoclean:NonDependentClass ;
+  a ontoclean:DependentClass ;
   ontoclean:subClassOf trans:ImpulseResponseModel .
 
 trans:DimensionStructure a owl:NamedIndividual ;
@@ -168,7 +168,7 @@ trans:EllipticRationalFunction a owl:NamedIndividual ;
   a ontoclean:RigidClass ;
   a ontoclean:UnityClass ;
   a ontoclean:SortalClass ;
-  a ontoclean:NonDependentClass ;
+  a ontoclean:DependentClass ;
   ontoclean:subClassOf trans:RationalFraction .
 
 trans:FilterType a owl:NamedIndividual ;
@@ -176,7 +176,7 @@ trans:FilterType a owl:NamedIndividual ;
   a ontoclean:RigidClass ;
   a ontoclean:UnityClass ;
   a ontoclean:SortalClass ;
-  a ontoclean:NonDependentClass ;
+  a ontoclean:DependentClass ;
   ontoclean:subClassOf trans:TransferModel .
 
 trans:FiniteImpulseResponseModel a owl:NamedIndividual ;
@@ -206,7 +206,7 @@ trans:FrequencyDomain a owl:NamedIndividual ;
 trans:FrequencySpectrum a owl:NamedIndividual ;
   a ontoclean:Class ;
   a ontoclean:RigidClass ;
-  a ontoclean:AntiUnityClass ;
+  a ontoclean:NonUnityClass ;
   a ontoclean:SortalClass ;
   a ontoclean:DependentClass ;
   ontoclean:subClassOf trans:MathematicalObject .
@@ -232,7 +232,7 @@ trans:ImpulseResponseModel a owl:NamedIndividual ;
   a ontoclean:RigidClass ;
   a ontoclean:UnityClass ;
   a ontoclean:SortalClass ;
-  a ontoclean:NonDependentClass ;
+  a ontoclean:DependentClass ;
   ontoclean:subClassOf trans:TransferModel .
 
 trans:InfiniteImpulseResponseModel a owl:NamedIndividual ;
@@ -302,7 +302,7 @@ trans:LTISystem a owl:NamedIndividual ;
 trans:MathematicalObject a owl:NamedIndividual ;
   a ontoclean:Class ;
   a ontoclean:RigidClass ;
-  a ontoclean:AntiUnityClass ;
+  a ontoclean:NonUnityClass ;
   a ontoclean:SortalClass ;
   a ontoclean:NonDependentClass ;
   ontoclean:subClassOf math:E34 .
@@ -312,7 +312,7 @@ trans:NonLinearStateSpaceModel a owl:NamedIndividual ;
   a ontoclean:RigidClass ;
   a ontoclean:UnityClass ;
   a ontoclean:SortalClass ;
-  a ontoclean:NonDependentClass ;
+  a ontoclean:DependentClass ;
   ontoclean:subClassOf trans:StateSpaceModel .
 
 trans:NonlinearSystem a owl:NamedIndividual ;
@@ -359,7 +359,7 @@ trans:StateSpaceModel a owl:NamedIndividual ;
   a ontoclean:RigidClass ;
   a ontoclean:UnityClass ;
   a ontoclean:SortalClass ;
-  a ontoclean:NonDependentClass ;
+  a ontoclean:DependentClass ;
   ontoclean:subClassOf trans:TransferModel .
 
 trans:Static a owl:NamedIndividual ;
@@ -375,7 +375,7 @@ trans:StepResponseModel a owl:NamedIndividual ;
   a ontoclean:RigidClass ;
   a ontoclean:UnityClass ;
   a ontoclean:SortalClass ;
-  a ontoclean:NonDependentClass ;
+  a ontoclean:DependentClass ;
   ontoclean:subClassOf trans:TransferModel .
 
 trans:SystemType a owl:NamedIndividual ;
@@ -404,7 +404,7 @@ trans:TimeDomain a owl:NamedIndividual ;
 trans:TimeSeries a owl:NamedIndividual ;
   a ontoclean:Class ;
   a ontoclean:RigidClass ;
-  a ontoclean:AntiUnityClass ;
+  a ontoclean:NonUnityClass ;
   a ontoclean:SortalClass ;
   a ontoclean:DependentClass ;
   ontoclean:subClassOf trans:MathematicalObject .
