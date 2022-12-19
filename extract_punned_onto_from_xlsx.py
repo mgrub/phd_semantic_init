@@ -2,7 +2,7 @@ import os
 import pandas as pd
 
 # what to load
-input_path = os.path.abspath("ontologies/scal_punned_testing.xlsx")
+input_path = os.path.abspath("ontologies/scal_punned.xlsx")
 output_path = os.path.splitext(input_path)[0] + ".ttl"
 
 # read in excel file
@@ -23,14 +23,18 @@ meta_properties = doc[sheets[1]].fillna("")
 
 for group_name, group in meta_properties.groupby("Category"):
     turtle_file_content.append("\n\n### " + group_name + "\n")
-    for i, row in group.iterrows():
+    for _, row in group.iterrows():
         c = row["Class"]
         r = row["Rigidity"]
         i = row["Identity"]
         u = row["Unity"]
         d = row["Dependence"]
+        cat = row["Category"]
         subof = row["subClassOf"]
         hassub = row["hasSubClass"]
+
+
+        print(f"\\texttt{{{c}}} {'$^*$' if cat == 'Assumed external meta properties' else ''} & \\texttt{{{r}}} & \\texttt{{{u}}} & \\texttt{{{i}}} & \\texttt{{{d}}} \\\\")
 
         # translate into ontoclean classes
         ## rigidity
