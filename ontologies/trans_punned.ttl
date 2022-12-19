@@ -1,0 +1,418 @@
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix om: <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix ssn: <http://www.w3.org/ns/ssn/> .
+@prefix scal: <http://www.example.com/ns/scal/> .
+@prefix si: <https://ptb.de/si#> .
+@prefix math: <http://cll.niimm.ksu.ru/ontologies/mathematics#> .
+   
+@prefix ontoclean: <http://www.meteck.org/teaching/ontologies/ontoclean-dl.owl#> .
+@prefix trans: <http://www.example.com/ns/trans/> .
+   
+trans: a owl:Ontology ;
+ dcterms:title "Sensor Dynamic Transfer Behavior Ontology (trans)"@en  ;
+ owl:imports <http://www.meteck.org/teaching/ontologies/ontoclean-dl.owl> .
+
+
+### Assumed external meta properties
+
+math:E34 a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:AntiUnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:NonDependentClass .
+
+om:Measure a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:NonDependentClass .
+
+scal:CalibrationModel a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:NonDependentClass .
+
+si:MeasureWithUncertainty a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:DependentClass .
+
+
+
+### Internal meta properties
+
+trans:AnalyticalDomain a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:NonDependentClass .
+
+trans:Array a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:DependentClass ;
+  ontoclean:subClassOf trans:MathematicalObject, om:Measure .
+
+trans:ArrayWithUncertainty a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:DependentClass ;
+  ontoclean:subClassOf si:MeasureWithUncertainty .
+
+trans:BandPass a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:NonRigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:NonSortalClass ;
+  a ontoclean:NonDependentClass ;
+  ontoclean:subClassOf trans:FrequencyBehavior .
+
+trans:BandStop a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:NonRigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:NonSortalClass ;
+  a ontoclean:NonDependentClass ;
+  ontoclean:subClassOf trans:FrequencyBehavior .
+
+trans:Bessel a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:DependentClass ;
+  ontoclean:subClassOf trans:FilterType .
+
+trans:Butterworth a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:NonDependentClass ;
+  ontoclean:subClassOf trans:FilterType .
+
+trans:Chebyshev a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:DependentClass ;
+  ontoclean:subClassOf trans:FilterType .
+
+trans:Continuous a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:NonDependentClass ;
+  ontoclean:subClassOf trans:DimensionStructure .
+
+trans:ContinuousImpulseResponseModel a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:NonDependentClass ;
+  ontoclean:subClassOf trans:ImpulseResponseModel .
+
+trans:DimensionStructure a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:NonDependentClass .
+
+trans:Discrete a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:NonDependentClass ;
+  ontoclean:subClassOf trans:DimensionStructure .
+
+trans:Dynamic a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:NonRigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:NonSortalClass ;
+  a ontoclean:NonDependentClass ;
+  ontoclean:subClassOf trans:TemporalBehavior .
+
+trans:Elliptic a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:DependentClass ;
+  ontoclean:subClassOf trans:FilterType .
+
+trans:EllipticRationalFunction a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:NonDependentClass ;
+  ontoclean:subClassOf trans:RationalFraction .
+
+trans:FilterType a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:NonDependentClass ;
+  ontoclean:subClassOf trans:TransferModel .
+
+trans:FiniteImpulseResponseModel a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:DependentClass ;
+  ontoclean:subClassOf trans:ImpulseResponseModel .
+
+trans:FrequencyBehavior a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:NonSortalClass ;
+  a ontoclean:NonDependentClass ;
+  ontoclean:subClassOf trans:QualitativeBehavior .
+
+trans:FrequencyDomain a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:NonDependentClass ;
+  ontoclean:subClassOf trans:AnalyticalDomain .
+
+trans:FrequencySpectrum a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:AntiUnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:DependentClass ;
+  ontoclean:subClassOf trans:MathematicalObject .
+
+trans:GainOffsetNotation a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:DependentClass ;
+  ontoclean:subClassOf trans:MathematicalObject .
+
+trans:HighPass a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:NonRigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:NonSortalClass ;
+  a ontoclean:NonDependentClass ;
+  ontoclean:subClassOf trans:FrequencyBehavior .
+
+trans:ImpulseResponseModel a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:NonDependentClass ;
+  ontoclean:subClassOf trans:TransferModel .
+
+trans:InfiniteImpulseResponseModel a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:DependentClass ;
+  ontoclean:subClassOf trans:ImpulseResponseModel .
+
+trans:LinearAffineModel a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:DependentClass ;
+  ontoclean:subClassOf trans:TransferModel .
+
+trans:LinearDifferenceEquation a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:DependentClass ;
+  ontoclean:subClassOf trans:MathematicalObject .
+
+trans:LinearOrdinaryDifferentialEquation a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:DependentClass ;
+  ontoclean:subClassOf trans:MathematicalObject .
+
+trans:LinearStateSpaceModel a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:DependentClass ;
+  ontoclean:subClassOf trans:StateSpaceModel .
+
+trans:LinearSystem a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:NonDependentClass ;
+  ontoclean:subClassOf trans:SystemType .
+
+trans:LowPass a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:NonRigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:NonSortalClass ;
+  a ontoclean:NonDependentClass ;
+  ontoclean:subClassOf trans:FrequencyBehavior .
+
+trans:LTISystem a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:NonDependentClass ;
+  ontoclean:subClassOf trans:LinearSystem .
+
+trans:MathematicalObject a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:AntiUnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:NonDependentClass ;
+  ontoclean:subClassOf math:E34 .
+
+trans:NonLinearStateSpaceModel a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:NonDependentClass ;
+  ontoclean:subClassOf trans:StateSpaceModel .
+
+trans:NonlinearSystem a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:NonDependentClass ;
+  ontoclean:subClassOf trans:SystemType .
+
+trans:Polynomial a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:DependentClass ;
+  ontoclean:subClassOf trans:MathematicalObject .
+
+trans:QualitativeBehavior a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:NonSortalClass ;
+  a ontoclean:NonDependentClass .
+
+trans:RationalFraction a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:DependentClass ;
+  ontoclean:subClassOf trans:MathematicalObject .
+
+trans:StateSpaceMatrixNotation a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:DependentClass ;
+  ontoclean:subClassOf trans:MathematicalObject .
+
+trans:StateSpaceModel a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:NonDependentClass ;
+  ontoclean:subClassOf trans:TransferModel .
+
+trans:Static a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:NonRigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:NonSortalClass ;
+  a ontoclean:NonDependentClass ;
+  ontoclean:subClassOf trans:TemporalBehavior .
+
+trans:StepResponseModel a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:NonDependentClass ;
+  ontoclean:subClassOf trans:TransferModel .
+
+trans:SystemType a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:NonDependentClass .
+
+trans:TemporalBehavior a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:NonRigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:NonSortalClass ;
+  a ontoclean:NonDependentClass ;
+  ontoclean:subClassOf trans:QualitativeBehavior .
+
+trans:TimeDomain a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:NonDependentClass ;
+  ontoclean:subClassOf trans:AnalyticalDomain .
+
+trans:TimeSeries a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:AntiUnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:DependentClass ;
+  ontoclean:subClassOf trans:MathematicalObject .
+
+trans:TransferModel a owl:NamedIndividual ;
+  a ontoclean:Class ;
+  a ontoclean:RigidClass ;
+  a ontoclean:UnityClass ;
+  a ontoclean:SortalClass ;
+  a ontoclean:DependentClass ;
+  ontoclean:subClassOf scal:CalibrationModel .

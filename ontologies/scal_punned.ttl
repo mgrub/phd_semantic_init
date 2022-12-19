@@ -23,7 +23,7 @@ scal: a owl:Ontology ;
 sosa:Platform a owl:NamedIndividual ;
   a ontoclean:Class ;
   a ontoclean:RigidClass ;
-  a ontoclean:UnityClass ;
+  a ontoclean:AntiUnityClass ;
   a ontoclean:SortalClass ;
   a ontoclean:NonDependentClass .
 
@@ -92,7 +92,7 @@ scal:CalibrationModel a owl:NamedIndividual ;
 scal:Location a owl:NamedIndividual ;
   a ontoclean:Class ;
   a ontoclean:RigidClass ;
-  a ontoclean:UnityClass ;
+  a ontoclean:AntiUnityClass ;
   a ontoclean:SortalClass ;
   a ontoclean:NonDependentClass ;
   ontoclean:subClassOf sosa:Platform, geo:SpatialObject .
@@ -116,7 +116,7 @@ scal:EquationModel a owl:NamedIndividual ;
 scal:Equation a owl:NamedIndividual ;
   a ontoclean:Class ;
   a ontoclean:RigidClass ;
-  a ontoclean:NonUnityClass ;
+  a ontoclean:UnityClass ;
   a ontoclean:SortalClass ;
   a ontoclean:NonDependentClass .
 
