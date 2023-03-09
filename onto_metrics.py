@@ -38,8 +38,9 @@ PREFIX si:         <https://ptb.de/si#>
 # evaluate OntoQA schema metrics 
 onto_ns = "http://www.example.com/ns/scal/"
 
-## Relationship Richness
 
+
+## Relationship Richness
 ### query number of class / subclass relations
 query_SC = f'''
 SELECT (SAMPLE(?s) AS ?subject) (COUNT(?o) as ?n_props)
@@ -69,9 +70,10 @@ P_plus_SC = sum([item[1] for item in res_all])
 RR = 1 - SC / P_plus_SC
 print(RR)  # close to zero -> taxonomy alike, close to one -> 
 
+
+
 ## Attribute Richness
-
-
+### query classes that are labeled
 query_att = f'''
 SELECT (SAMPLE(?s) AS ?subject) (COUNT(?att) as ?n_att)
 WHERE {{
@@ -88,8 +90,9 @@ WHERE {{
 }}
 GROUP BY ?s
 '''
+res_att = list(owl.default_world.sparql(prefixes + query_att))
 
-
+### query classes in onto_ns
 query_C = f'''
 SELECT DISTINCT ?s
 WHERE {{
@@ -97,15 +100,17 @@ WHERE {{
     FILTER(STRSTARTS(STR(?s), "{onto_ns}"))
 }}
 '''
-res_att = list(owl.default_world.sparql(prefixes + query_att))
 res_c = list(owl.default_world.sparql(prefixes + query_C))
 
+### calculate AR
 att = sum([item[1] for item in res_att])
 AR = len(res_att) / len(res_c)
 print(AR)  # higher -> indicates higher quality of ontology
 
-## Inheritance Richness
 
+
+## Inheritance Richness
+### query how many subclasses a class has
 query_sum_H = f'''
 SELECT (SAMPLE(?s1) AS ?subject) (COUNT(?s2) as ?n_subclasses)
 WHERE {{
@@ -115,8 +120,8 @@ WHERE {{
 }}
 GROUP BY ?s1
 '''
-
 res_sumH = list(owl.default_world.sparql(prefixes + query_sum_H))
 
-IRs = len(res_sumH) / len(res_c)
+### calculate IR
+IRs = sum([item[1] for item in res_sumH]) / len(res_c)
 print(IRs)  # lower -> more detailed ontology, higher -> more general knowledge
