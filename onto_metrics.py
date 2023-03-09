@@ -116,7 +116,7 @@ SELECT (SAMPLE(?s1) AS ?subject) (COUNT(?s2) as ?n_subclasses)
 WHERE {{
     ?s1 a owl:Class .
     ?s2 rdfs:subClassOf+ ?s1 .
-    FILTER(STRSTARTS(STR(?s1), "{onto_ns}")) 
+    FILTER(STRSTARTS(STR(?s2), "{onto_ns}")) 
 }}
 GROUP BY ?s1
 '''
