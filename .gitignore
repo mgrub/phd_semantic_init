@@ -1,1 +1,9 @@
+ontologies/*
 *.rdf
+*.json
+
+!scal_punned.ttl
+!scal_punned.xlsx
+
+!trans_punned.ttl
+!trans_punned.xlsx

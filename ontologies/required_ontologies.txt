@@ -1,0 +1,12 @@
+Please place the following files in this directory:
+
+geo.rdf             --> http://www.opengis.net/ont/geosparql#
+math.omn            --> https://raw.githubusercontent.com/CLLKazan/OntoMathPro/master/OntoMathPro.omn
+ontoclean-dl.owl    --> https://people.cs.uct.ac.za/~mkeet/OEbook/ontologies/ontoclean-dl.owl
+om-2.0.rdf          --> https://raw.githubusercontent.com/HajoRijgersberg/OM/master/om-2.0.rdf
+scal.ttl            --> https://purl.org/onto/scal/
+schema.ttl          --> https://schema.org/version/latest/schemaorg-current-https.ttl
+sosa.ttl            --> http://www.w3.org/ns/sosa/
+ssn-system.ttl      --> www.w3.org/ns/ssn/systems/
+ssn.ttl             --> http://www.w3.org/ns/ssn/
+trans.ttl           --> https://purl.org/onto/trans/
